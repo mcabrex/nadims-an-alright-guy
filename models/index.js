@@ -4,7 +4,7 @@ const db = new Sequelize('postgres://localhost:5432/name',{
 })
 
 
-let Place = db.define({
+let Place = db.define('place',{
   address: {
     type: Sequelize.STRING,
     allowNull: false
@@ -27,7 +27,7 @@ let Place = db.define({
   }
 })
 
-let Hotel = db.define({
+let Hotel = db.define('hotel',{
   name: {
     type: Sequelize.STRING,
     allowNull: false
@@ -46,7 +46,7 @@ let Hotel = db.define({
   }
 })
 
-let Activity = db.define({
+let Activity = db.define('activity',{
   name: {
     type: Sequelize.STRING,
     allowNull: false
@@ -57,7 +57,7 @@ let Activity = db.define({
   }
 })
 
-let Restaurant = db.define({
+let Restaurant = db.define('restaurant',{
   name: {
     type: Sequelize.STRING,
     allowNull: false

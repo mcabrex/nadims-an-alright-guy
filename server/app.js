@@ -2,8 +2,9 @@ var express = require("express");
 var volleyball = require("volleyball");
 var bodyParser = require("body-parser");
 var path = require("path");
+const router = require('../routes')
 
-var db = require("./models").db;
+var db = require("../models").db;
 
 var app = express();
 
@@ -29,6 +30,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.send("Something went wrong: " + err.message);
 });
+
+app.use('/api', router);
 
 // listen on a port
 var port = 3000;
