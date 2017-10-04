@@ -6,26 +6,20 @@ const Hotel = models.Hotel;
 const Activity = models.Activity;
 const Restaurant = models.Restaurant;
 
-models.export = router;
+router.get('/', (req, res, next) => {
+    const proArr = [];
+    proArr.push(Activity.findAll({include: [{all: true}]})); //include {[Place]}
+    proArr.push(Restaurant.findAll({include: [{all: true}]}));
+    proArr.push(Hotel.findAll({include: [{all: true}]}));
+    Promise.all(proArr)
+    .then(([activities, restaurants, hotels]) => {
+        // allAttractions.Activity = proArr[0];
+        // allAttractions.Restaurant = proArr[1];
+        // allAttractions.Hotel = proArr[2];
+        res.json({activities, restaurants, hotels});
+    })
+    .catch(next);
+})
 
 
-router.get('/api',function(req,res,next){
-  var allAttractions = {};
-
-  Hotel.findAll()
-  .then(function(hotels) {
-    allAttractions.hotels = hotels;
-    return Restaurant.findAll();
-  })
-  .then(function(restaurants) {
-    allAttractions.restaurants = restaurants;
-    return Activity.findAll();
-  })
-  .then(function(activities) {
-    allAttractions.activities = activities;
-  })
-  .then(function() {
-    res.json(allAttractions);
-  })
-  .catch(next);
-});
+module.exports = { router  };

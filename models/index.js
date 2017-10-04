@@ -76,9 +76,9 @@ let Restaurant = db.define('restaurant',{
   }
 })
 
-Hotel.hasMany(Place);
-Restaurant.hasMany(Place);
-Activity.hasMany(Place);
+Hotel.belongsTo(Place);
+Restaurant.belongsTo(Place);
+Activity.belongsTo(Place);
 
 module.exports = {
   db: db,

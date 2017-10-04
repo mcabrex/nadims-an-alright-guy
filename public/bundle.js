@@ -537,7 +537,7 @@ module.exports={"$version":8,"$root":{"version":{"required":true,"type":"enum","
 const mapboxgl = __webpack_require__(0);
 const buildMarker = __webpack_require__(3);
 
-mapboxgl.accessToken = "YOUR API TOKEN HERE";
+mapboxgl.accessToken = "pk.eyJ1IjoibWNhYnJleCIsImEiOiJjajhicjJpa3IwMHYxMndwNTgxNnExcXV4In0.Y4uLeXFkwIE4sJroLZTpeg";
 
 const map = new mapboxgl.Map({
   container: "map",
@@ -549,6 +549,20 @@ const map = new mapboxgl.Map({
 const marker = buildMarker("activities", [-74.009, 40.705]);
 marker.addTo(map);
 
+
+window.fetch('/api')
+.then(result => result.json())
+.then(data => {
+	let keys = Object.keys(data);
+	keys.forEach(val => {
+		data[val].forEach(value => {
+			let option = document.getElementById(`${val}-choices`);
+			let newNode = document.createElement("option");
+			newNode.text = value.name;
+			option.add(newNode);
+		})
+	})
+})
 
 /***/ }),
 /* 2 */
